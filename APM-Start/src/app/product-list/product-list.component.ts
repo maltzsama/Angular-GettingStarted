@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
   pageTitle: string = 'Product List';
+  showImage: boolean = false;
+  filter: string = 'carts';
   products: any[] = [
     {
         'productId': 1,
@@ -63,6 +66,10 @@ export class ProductListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showImageClick() {
+      this.showImage = !this.showImage;
   }
 
 }
