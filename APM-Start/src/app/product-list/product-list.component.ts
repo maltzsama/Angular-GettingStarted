@@ -1,3 +1,4 @@
+import { IProduct } from './product';
 import { FormsModule } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,8 +10,17 @@ import { Component, OnInit } from '@angular/core';
 export class ProductListComponent implements OnInit {
   pageTitle: string = 'Product List';
   showImage: boolean = false;
-  filter: string = 'carts';
-  products: any[] = [
+  _filterBy: string;
+  get filterBy(): string{
+    return this._filterBy;
+  }
+  set filterBy(value: string) {
+      this._filterBy = value;
+      this.filteredProducts = this.filterBy ? this.performFilter(this.filterBy) : this.products;
+  }
+
+  filteredProducts: Array<IProduct> = [];
+  products: Array<IProduct> = [
     {
         'productId': 1,
         'productName': 'Leaf Rake',
@@ -63,13 +73,23 @@ export class ProductListComponent implements OnInit {
     }
 ];
 
-  constructor() { }
+
+  constructor() {
+      this.filteredProducts = this.products;
+      this.filterBy = 'cart';
+  }
 
   ngOnInit() {
+      console.log('In OnInit');
   }
 
   showImageClick() {
-      this.showImage = !this.showImage;
+    this.showImage = !this.showImage;
   }
 
+  performFilter(filterBy: string): Array<IProduct> {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) =>
+            product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
 }
