@@ -21,15 +21,22 @@ export class ProductListComponent implements OnInit {
       this.filteredProducts = this.filterBy ? this.performFilter(this.filterBy) : this.products;
   }
 
-  filteredProducts: Array<IProduct> = [];
-  products: Array<IProduct> = [];
-
+  filteredProducts: IProduct[] = [];
+  products: IProduct[] = [];
+  errorMessage: string;
 
   constructor(private _prodService: ProductsService) { }
 
   ngOnInit() {
-    this.products = this._prodService.getProducts();
-    this.filteredProducts = this.products;
+    // this.products = this._prodService.getProducts();
+    this._prodService.getProducts()
+        .subscribe(
+            products => {
+                this.products = products;
+                this.filteredProducts = this.products;
+            },
+            error => this.errorMessage = <any>error);
+
   }
 
   showImageClick() {

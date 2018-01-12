@@ -4,14 +4,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/throw';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ProductsService {
-  private _productURL: string  = 'www.myWebService.com/api/products/products.json';
+  private _productUrl: string  = './api/products/products.json';
+
   constructor(private _http: HttpClient) { }
+
   getProducts(): Observable<IProduct[]> {
-    return this._http.get<IProduct[]>(this._productURL)
+    return this._http.get<IProduct[]>(this._productUrl)
               .do(data => console.log('All:' + JSON.stringify(data)))
               .catch(this.handleError);
   }

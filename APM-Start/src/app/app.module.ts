@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,7 @@ import { ConvertToSpacesPipe } from './shared/convert-to-space.pipe';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClient
+    HttpClientModule
   ],
   providers: [
     ProductsService
