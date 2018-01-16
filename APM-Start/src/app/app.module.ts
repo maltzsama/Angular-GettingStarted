@@ -10,8 +10,9 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { StarComponent } from './shared/star/star.component';
 import { ProductsService } from './product-list/products.service';
 import { ConvertToSpacesPipe } from './shared/convert-to-space.pipe';
-import { ProductDetailComponent } from './product-list/product-detail.component';
+import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { ProductGuardService } from './products/product-guard.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { WelcomeComponent } from './home/welcome.component';
     RouterModule.forRoot(ROUTES)
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    ProductGuardService
   ],
   bootstrap: [AppComponent]
 })
